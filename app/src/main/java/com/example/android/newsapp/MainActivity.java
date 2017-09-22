@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -44,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 try {
-                    Toast.makeText(MainActivity.this, ""+response, Toast.LENGTH_SHORT).show();
                     JSONObject parent = new JSONObject(response);
                     JSONArray articleArray = parent.getJSONArray("articles");
                     for(int i=0;i<parent.length();i++){
@@ -96,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
             holder.descText.setText(model.getDescription());
             holder.aurthorText.setText(model.getAuthor());
             holder.timeText.setText(model.getPublishedAt());
+            holder.setUrlToImage(model.getUrlToImage(),c);
 
         }
 
@@ -106,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public class NewsHolder extends RecyclerView.ViewHolder{
         TextView titleText,descText,aurthorText,timeText;
+        ImageView imageView;
 
         public NewsHolder(View itemView) {
             super(itemView);
@@ -113,6 +116,14 @@ public class MainActivity extends AppCompatActivity {
             descText = itemView.findViewById(R.id.news_description);
             aurthorText = itemView.findViewById(R.id.news_aurthor);
             timeText = itemView.findViewById(R.id.news_time);
+
+        }
+
+        void setUrlToImage(String urlToImage,Context c){
+            if(urlToImage!=null){
+                imageView = itemView.findViewById(R.id.news_image);
+                Picasso.with(c).load(urlToImage).into(imageView);
+            }
         }
     }
 }
