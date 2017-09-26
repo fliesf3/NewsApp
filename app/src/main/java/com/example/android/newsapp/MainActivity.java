@@ -31,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     List<ArticleModel> modelList;
-    private static final String baseUrl = " https://newsapi.org/v1/articles?source=techcrunch&apiKey=9f5c862d1f4f4ef791ad40180322d26f";
+    private static final String baseUrl =
+            " https://newsapi.org/v1/articles?source=techcrunch&apiKey=9f5c862d1f4f4ef791ad40180322d26f";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
